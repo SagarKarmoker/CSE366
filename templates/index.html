@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Recommendation System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-300">
+    <div class="flex flex-col items-center justify-center min-h-screen mb-20">
+        <h1 class="text-center text-5xl font-semibold mb-4 mt-4">Product Recommendation System</h1>
+        <form method="POST" action="/" class="flex justify-center mb-4">
+            <input type="text" name="user_input" placeholder="Enter product name or other details"
+                class="p-2 rounded-l-lg border">
+            <button type="submit" class="p-2 bg-blue-500 text-white rounded-r-lg">🔍 Search and recommend
+                products</button>
+        </form>
+
+        {% if search_results %}
+        <p class="text-center">You searched result for: {{ user_input }}</p>
+        {% endif %}
+
+        <h1 class="text-center text-2xl font-bold mb-2">Popular Products based on user rating</h1>
+
+        <div class="container mx-auto">
+            <div class="grid grid-cols-5 gap-4">
+                {% for _, row in random_sample.iterrows() %}
+                <div class="col-span-1">
+                    <div class="card w-72 h-full shadow-lg p-4 rounded-lg flex flex-col bg-white">
+                        <img src="{{ row['img_link'] }}" class="h-100 w-100" alt="product image">
+                        <div class="flex-grow">
+                            <h2 class="font-bold mt-2 truncate">{{ row['product_name'] }}</h2>
+                            <p class="w-fit mt-2 truncate">{{ row['category'].split('|')[0] }}</p>
+                            <h2 class="font-semibold mt-2">{{ row['discounted_price'] }}</h2>
+                        </div>
+                        <button class="bg-blue-500 text-white p-2 rounded-lg mt-2"><a
+                                href="{{ row['product_link'] }}">Buy Now</a></button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
