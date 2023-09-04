@@ -74,11 +74,15 @@
                 </th>
               </tr>
             </thead>
-            {% for product in search_results %}
-            <tr>
-              <td class="px-6 py-4 whitespace-no-wrap">{{ product }}</td>
-            </tr>
-            {% endfor %}
+            <tbody>
+              {% for product in search_results %}
+                {% for p in product %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-no-wrap text-center border">{{ p }}</td>
+                </tr>
+                {% endfor %}
+              {% endfor %}
+          </tbody>
           </table>
         </div>
       </div>
