@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Recommendation System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-300">
+  <div class="flex justify-center mt-4" data-te-dropdown-ref>
+    <button
+      class="flex items-center bg-white whitespace-nowrap rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] motion-reduce:transition-none dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+      type="button" id="dropdownMenuButton1" data-te-dropdown-toggle-ref aria-expanded="false" data-te-ripple-init
+      data-te-ripple-color="light">
+      Select Your Desired Model
+      <span class="ml-2 w-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+          <path fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            clip-rule="evenodd" />
+        </svg>
+      </span>
+    </button>
+    <ul
+      class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+      aria-labelledby="dropdownMenuButton1" data-te-dropdown-menu-ref>
+      <li>
+        <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+          href="#" data-te-dropdown-item-ref>Content Based (Dataset Amazone)</a>
+      </li>
+      <li>
+        <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+          href="#" data-te-dropdown-item-ref>Collaborative Filtering Based (Dataset Rating)</a>
+      </li>
+      <li>
+        <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-600"
+          href="#" data-te-dropdown-item-ref>Popularity Based (Dataset Rating)</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="flex flex-col items-center justify-center min-h-screen mb-20">
+    <h1 class="text-center text-5xl font-semibold mb-4 mt-4">
+      Product Recommendation System
+    </h1>
+    <form method="POST" action="/collaborative-filtering" class="flex justify-center mb-4">
+      <input type="text" name="user_input" placeholder="Enter product full name" class="p-2 rounded-l-lg border" />
+      <button type="submit" class="p-2 bg-blue-500 text-white rounded-r-lg">
+        🔍 Product Name
+      </button>
+    </form>
+    <p>Hint: $100 Physical Gift Card</p>
+
+    {% if user_input %}
+    <p class="text-center">
+      You searched for products with a rating of: {{ user_input }}
+    </p>
+    {% endif %}
+
+    <div class="container mx-auto">
+      <h1 class="text-center text-2xl font-bold mb-2">
+        Popular products based on user rating
+      </h1>
+
+      <div>
+        <div>
+          <table class="min-w-full bg-white rounded-lg overflow-hidden w-full">
+            <thead class="bg-gray-800 text-white">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs leading-4 font-medium uppercase tracking-wider text-center">
+                  Product Name
+                </th>
+              </tr>
+            </thead>
+            {% for product in search_results %}
+            <tr>
+              <td class="px-6 py-4 whitespace-no-wrap">{{ product }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Js code for model selection-->
+  <script>
+    // Function to toggle the dropdown menu
+    function toggleDropdown() {
+      const dropdownMenu = document.querySelector(
+        "[data-te-dropdown-menu-ref]"
+      );
+      dropdownMenu.classList.toggle("hidden");
+    }
+
+    // Function to handle item selection
+    function selectItem(itemText) {
+      // Define a mapping of item text to URLs
+      const itemUrlMapping = {
+        "Content Based (Dataset Amazone)": "/content-based",
+        "Collaborative Filtering Based (Dataset Rating)":
+          "/collaborative-filtering",
+        "Popularity Based (Dataset Rating)": "/popularity-based",
+      };
+
+      // Get the URL associated with the selected item text
+      const selectedItemUrl = itemUrlMapping[itemText];
+
+      if (selectedItemUrl) {
+        // Redirect to the selected URL
+        window.location.href = selectedItemUrl;
+      } else {
+        console.error(`No URL mapping found for item: ${itemText}`);
+      }
+    }
+
+    // Add click event listener to the dropdown button
+    const dropdownButton = document.querySelector(
+      "[data-te-dropdown-toggle-ref]"
+    );
+    dropdownButton.addEventListener("click", toggleDropdown);
+
+    // Add click event listeners to dropdown items
+    const dropdownItems = document.querySelectorAll(
+      "[data-te-dropdown-item-ref]"
+    );
+    dropdownItems.forEach((item) => {
+      item.addEventListener("click", (event) => {
+        event.preventDefault();
+        const selectedItemText = item.textContent.trim();
+        selectItem(selectedItemText);
+      });
+    });
+  </script>
+</body>
+
+</html>
