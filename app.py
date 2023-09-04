@@ -35,7 +35,7 @@ def index():
         return render_template("index.html", user_input=user_input, random_sample=recommended_rows, search_results=search_results, data=data)
     else:
         random_sample = data.sample(n=10)  # Get a random sample of 10 rows
-        return render_template("index.html", user_input=user_input, search_results=search_results, random_sample=random_sample)
+        return render_template("index.html", random_sample=random_sample)
 
 
 @app.route("/content-based", methods=["GET", "POST"])
