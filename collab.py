@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 
 def recProduct(name):
-  products = pd.read_json('/workspaces/CSE366/Dataset_new/products.json')
-  customers = pd.read_json('/workspaces/CSE366/Dataset_new/customers.json')
-  ratings = pd.read_json('/workspaces/CSE366/Dataset_new/ratings.json')
+  products = pd.read_json('./Dataset_new/products.json')
+  customers = pd.read_json('./Dataset_new/customers.json')
+  ratings = pd.read_json('./Dataset_new/ratings.json')
   ratings = ratings[['CustomerID', 'ProductID', 'Rate']]
 
   products.rename(columns = {'Id':'ProductID'}, inplace = True)

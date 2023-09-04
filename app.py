@@ -8,7 +8,7 @@ from collab import recProduct
 app = Flask(__name__)
 
 data = pd.read_csv("./amazon.csv")
-products = pd.read_json('/workspaces/CSE366/Dataset_new/products.json')
+products = pd.read_json('./Dataset_new/products.json')
 
 recommend_products = []  # Initialize an empty list to store recommended indices
 popular_products = []

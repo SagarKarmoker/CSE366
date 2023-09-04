@@ -3,9 +3,9 @@ import numpy as np
 from datetime import datetime
 
 def popular_product(rating: int):
-    products = pd.read_json('/workspaces/CSE366/Dataset_new/products.json')
-    customers = pd.read_json('/workspaces/CSE366/Dataset_new/customers.json')
-    ratings = pd.read_json('/workspaces/CSE366/Dataset_new/ratings.json')
+    products = pd.read_json('./Dataset_new/products.json')
+    customers = pd.read_json('./Dataset_new/customers.json')
+    ratings = pd.read_json('./Dataset_new/ratings.json')
 
     # Drop the 'CreateDate' column from the ratings DataFrame
     ratings.drop(columns=["CreateDate"], inplace=True)
