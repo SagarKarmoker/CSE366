@@ -4,6 +4,8 @@ Model Used:<br />
 1. Content Based Filtering
 2. Collbrative Filtering 
 
+Notebooks: https://github.com/SagarKarmoker/CSE366_Product_Recommendation/tree/main/Notebooks
+
 This project is completed under the guidence of: <br />
 Dr. Mohammad Rifat Ahmmad Rashid<br />
 Assistant Professor,<br />
