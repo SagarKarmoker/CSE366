@@ -1,4 +1,4 @@
-# CSE366 Course Project 
+# CSE366 (Artificial Intelligence) Course Project 
 Project: Product Recommendation System <br />
 Model Used:<br />
 1. Content Based Filtering
