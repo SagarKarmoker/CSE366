@@ -2,7 +2,7 @@
 Project: Product Recommendation System <br />
 Model Used:<br />
 1. Content Based Filtering
-2. Collbrative Filtering 
+2. Collaborative Filtering 
 
 Notebooks: https://github.com/SagarKarmoker/CSE366_Product_Recommendation/tree/main/Notebooks
 
