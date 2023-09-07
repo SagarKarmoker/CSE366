@@ -4,7 +4,7 @@ Model Used:<br />
 1. Content Based Filtering
 2. Collaborative Filtering 
 
-Notebooks: https://github.com/SagarKarmoker/CSE366_Product_Recommendation/tree/main/Notebooks
+Notebooks: https://github.com/SagarKarmoker/CSE366/tree/main/Notebooks
 
 This project is completed under the guidence of: <br />
 Dr. Mohammad Rifat Ahmmad Rashid<br />
